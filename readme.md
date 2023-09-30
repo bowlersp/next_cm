@@ -29,7 +29,7 @@ PASSWORD=theworstpassword
 ```
 
 ## Script Execution
-Run the following command to initiate the CM API test sequence:
+Run the following command to initiate the CM API test sequence. The script will pause itself after deploying and self-validating the declaration exists, allowing for manual testing and validation prior to deletion.
 
 ```
 python3 cm_as3_test.py
