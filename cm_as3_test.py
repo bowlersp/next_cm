@@ -10,7 +10,7 @@ Load environment variables from the .env file
 Example .env format:
 
 ENDPOINT=testcmapi.f5demo.com
-USERNAME=thebestuser
+USERNAME=thebestusername
 PASSWORD=theworstpassword
 '''
 load_dotenv()
@@ -123,7 +123,7 @@ def deploy_declaration(declaration_id, instances):
 '''
 Run through the following sequence of events:
 
-1. Read AS3 declaration from file
+1. Read AS3 declaration from a local file
 2. POST the AS3 declaration to the CM API
 3. Deploy the AS3 declaration to a Next instance from
    the CM API
