@@ -176,8 +176,8 @@ def main():
     print(f"\nReading AS3 declaration from '{declaration_v2_filename}'\n")
     v2_declaration = read_declaration(declaration_v2_filename)
 
-    # Deploy an updated version of the AS3 declaration,
-    # which adds pool members to the app service
+    # Update the AS3 declaration to v2 which,
+    # adds pool members to the app service
     print(f"Updating AS3 declaration ID {declaration_id}")
     declaration_id = put_declaration(declaration_id, v2_declaration)
     print(f"AS3 Declaration with ID {declaration_id} has been updated\n")
@@ -185,9 +185,19 @@ def main():
     # Execute a brief pause while the declaration is consumed and deployed
     sleep(10)
 
-    print(f"Deploying v2 of AS3 declaration ID {declaration_id} to {', '.join(instances)}")
-    deploy_result = deploy_declaration(declaration_id, instances)
-    print(f"Deployment result: {deploy_result}\n")
+    # Deploy v2 of the AS3 declaration
+    # This is commented out because currently it does not appear
+    # this is the proper way to redeploy a declaration, as a response of
+    # 'AS3-0008: AS3 Validation Error: Application is already deployed to the BIG-IP Next instance'
+    #
+    # I have attempted manually updating the AS3 declaration within CM's
+    # UI, and still does not show the pool members, even though the
+    # AS3 declaration is successfully processed.
+    #
+    # print(f"Deploying v2 of AS3 declaration ID {declaration_id} to {', '.join(instances)}")
+    # deploy_result = deploy_declaration(declaration_id, instances)
+    # print(f"Deployment result: {deploy_result}\n")
+    #
 
     # Pause the flow to allow validation within CM UI
     # or testing of the deployed declaration
