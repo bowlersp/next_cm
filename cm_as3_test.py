@@ -184,7 +184,7 @@ def main():
     print(f"AS3 Declaration with ID {declaration_id} has been updated\n")
 
     # Execute a brief pause while the declaration is consumed and deployed
-    sleep(10)
+    sleep(2)
 
     # Deploy v2 of the AS3 declaration
     # This is commented out because currently it does not appear
