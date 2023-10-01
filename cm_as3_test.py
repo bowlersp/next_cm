@@ -40,7 +40,8 @@ def api_call(endpoint, method, uri, access_token, data=None):
     # If no access token is provided, attempt to obtain
     # one via the login process. Bail out if the login
     # attempt fails. Otherwise, continue on and perform
-    # the respective REST method.
+    # the respective REST method and return the
+    # JSON response object
     if access_token != "":
         headers["Authorization"] = f"Bearer {access_token}"
     else:
