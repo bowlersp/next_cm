@@ -12,7 +12,7 @@
       "class": "Tenant",
       "irule_demo_app001": {
         "class": "Application",
-        "irule_demo_pool": {
+        "irule_demo_pool001": {
           "class": "Pool",
           "loadBalancingMode": "round-robin",
           "members": [
@@ -42,7 +42,7 @@
           ],
           "mirroring": "L4",
           "persistenceMethods": [],
-          "pool": "irule_demo_pool",
+          "pool": "irule_demo_pool001",
           "serverTLS": "pTLSServer_Local_irule_demo_vs",
           "snat": "auto",
           "virtualAddresses": [

@@ -144,6 +144,7 @@ Run through the following sequence of events:
 '''
 def main():
     # Load v1 of the declaration from a file
+    # declaration_v1_filename = "irule_demo_app001_04_v1.json"
     declaration_v1_filename = "irule_demo_app001_04_v1.json"
     print(f"\nReading AS3 declaration from '{declaration_v1_filename}'\n")
     v1_declaration = read_declaration(declaration_v1_filename)

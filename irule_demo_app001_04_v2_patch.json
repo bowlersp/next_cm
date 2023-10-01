@@ -1,0 +1,19 @@
+{
+  "target_address": "10.1.1.11",
+  "edit_declaration": [
+    {
+      "op": "replace",
+      "path": "testTenant001/irule_demo_app001/irule_demo_pool001/members/servers",
+      "value": [
+        {
+          "address": "10.1.20.100",
+          "name": "node1"
+        },
+        {
+          "address": "10.1.20.101",
+          "name": "node2"
+        }
+      ]
+    }
+  ]
+}
