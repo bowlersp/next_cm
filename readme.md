@@ -20,7 +20,7 @@ Use this script as a starting point for interacting with the F5 BIG-IP Next Cent
 }
 ```
 
-Attempts to PUT a modified declaration to the CM API appear successful at first, and results are reflected when viewing the declaraion with CM's UI, but changes are not observed. The test scenario for this repo involves two versions of a declaration:
+Attempts to PUT a modified declaration to the CM API appear successful at first, and results are reflected when viewing the declaration with CM's UI, but changes are not observed. The test scenario for this repo involves two versions of a declaration:
 
 1. AS3 decrlation with no pool members
 2. AS3 declaration updated to include two pool members
