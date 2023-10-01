@@ -57,6 +57,7 @@ def api_call(endpoint, method, uri, access_token, data=None):
         response = requests.get(f"https://{endpoint}{uri}", headers=headers)
     if method == "patch":
         response = requests.patch(f"https://{endpoint}{uri}", headers=headers, data=json.dumps(data))
+        print(response.json())
     if method == "put":
         response = requests.put(f"https://{endpoint}{uri}", headers=headers, data=json.dumps(data))
     if method == "post":
@@ -92,10 +93,20 @@ def post_declaration(declaration):
     return r["id"]
 
 '''
+PATCH an AS3 declaration in the CM API
+'''
+def patch_declaration(declaration):
+    uri = "/mgmt/shared/appsvcs/declare"
+    r = api_call(endpoint=endpoint, method="patch", uri=uri, access_token="", data=declaration)
+
+    return r["id"]
+
+
+'''
 PUT an AS3 declaration to the CM 
 '''
 def put_declaration(declaration_id, declaration):    
-    uri = f"/mgmt/shared/appsvcs/declare/{declaration_id}?retry_failed=false"
+    uri = f"/mgmt/shared/appsvcs/declare/{declaration_id}"
     r = api_call(endpoint=endpoint, method="put", uri=uri, access_token="", data=declaration)
 
     return r["id"]
@@ -132,18 +143,18 @@ Run through the following sequence of events:
 5. Delete the deployed declaration via ID
 '''
 def main():
-    # Load a declaration from a file
-    filename = "irule_demo_app001_04.json"
-    print(f"\nReading declaration from '{filename}'\n")
-    declaration = read_declaration(filename)
+    # Load v1 of the declaration from a file
+    declaration_v1_filename = "irule_demo_app001_04_v1.json"
+    print(f"\nReading AS3 declaration from '{declaration_v1_filename}'\n")
+    v1_declaration = read_declaration(declaration_v1_filename)
 
     # The creation and deployment of a declaration
-    print("Sending declaration to CM API")
-    declaration_id = post_declaration(declaration)
-    print(f"Declaration with ID {declaration_id} has been created\n")
+    print("Sending AS3 declaration to CM API")
+    declaration_id = post_declaration(v1_declaration)
+    print(f"AS3 Declaration with ID {declaration_id} has been created\n")
 
     instances = ["10.1.1.11"]
-    print(f"Deploying declaration ID {declaration_id} to {', '.join(instances)}")
+    print(f"Deploying v1 AS3 declaration ID {declaration_id} to {', '.join(instances)}")
     deploy_result = deploy_declaration(declaration_id, instances)
     print(f"Deployment result: {deploy_result}\n")
 
@@ -152,14 +163,35 @@ def main():
 
     # Attempt retrieving a declaration by tenant name
     tenant_name = "testTenant001"
-    print(f"Searching declarations for tenant named '{tenant_name}'")
+    print(f"Searching AS3 declarations for tenant named '{tenant_name}'")
     declaration_id = get_declaration_by_name(tenant_name)
-    print(f"Successfully found tenant {tenant_name} with ID {declaration_id}\n")
+    print(f"Successfully found AS3 tenant {tenant_name} with ID {declaration_id}\n")
 
     # Pause the flow to allow validation within CM UI
     # or testing of the deployed declaration
-    input("Press Enter to continue with deletion\n")
+    input("Press Enter to continue with updating and redeploying the AS3 declaration\n")
 
+    # Load v2 of the declaration from a file
+    declaration_v2_filename = "irule_demo_app001_04_v2.json"
+    print(f"\nReading AS3 declaration from '{declaration_v2_filename}'\n")
+    v2_declaration = read_declaration(declaration_v2_filename)
+
+    # Deploy an updated version of the AS3 declaration,
+    # which adds pool members to the app service
+    print(f"Updating AS3 declaration ID {declaration_id}")
+    declaration_id = put_declaration(declaration_id, v2_declaration)
+    print(f"AS3 Declaration with ID {declaration_id} has been updated\n")
+
+    # Execute a brief pause while the declaration is consumed and deployed
+    sleep(10)
+
+    print(f"Deploying v2 of AS3 declaration ID {declaration_id} to {', '.join(instances)}")
+    deploy_result = deploy_declaration(declaration_id, instances)
+    print(f"Deployment result: {deploy_result}\n")
+
+    # Pause the flow to allow validation within CM UI
+    # or testing of the deployed declaration
+    input("Press Enter to continue with deletion of the AS3 declaration\n")
 
     # Delete the declaration
     print(f"Deleting declaration with ID of {declaration_id}")

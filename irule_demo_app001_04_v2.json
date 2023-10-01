@@ -1,0 +1,82 @@
+{
+    "class": "ADC",
+    "controls": {
+      "class": "Controls",
+      "logLevel": "error"
+    },
+    "id": "http-canonical-cm-example-template",
+    "label": "Central Manager Example Template",
+    "remark": "",
+    "schemaVersion": "3.43.0",
+    "testTenant001": {
+      "class": "Tenant",
+      "irule_demo_app001": {
+        "class": "Application",
+        "irule_demo_pool": {
+          "class": "Pool",
+          "loadBalancingMode": "round-robin",
+          "members": [
+            {
+              "ratio": 10,
+              "servers": [
+                {
+                  "address": "10.1.20.100",
+                  "name": "node1"
+                },
+                {
+                  "address": "10.1.20.101",
+                  "name": "node2"
+                }
+              ],
+              "servicePort": 8080
+            }
+          ],
+          "monitors": [
+            "http"
+          ]
+        },
+        "irule_demo_vs": {
+          "class": "Service_HTTPS",
+          "iRules": [
+            "udf_demo_xff_1_irule_demo_vs"
+          ],
+          "mirroring": "L4",
+          "persistenceMethods": [],
+          "pool": "irule_demo_pool",
+          "serverTLS": "pTLSServer_Local_irule_demo_vs",
+          "snat": "auto",
+          "virtualAddresses": [
+            "10.1.10.136"
+          ],
+          "virtualPort": 443
+        },
+        "pTLSServer_Local_irule_demo_vs": {
+          "certificates": [
+            {
+              "certificate": "tlsserver_local_cert_irule_demo_vs"
+            }
+          ],
+          "ciphers": "DEFAULT",
+          "class": "TLS_Server",
+          "tls1_1Enabled": false,
+          "tls1_2Enabled": true,
+          "tls1_3Enabled": false
+        },
+        "tlsserver_local_cert_irule_demo_vs": {
+          "certificate": {
+            "bigip": "self_demo.f5.com.crt"
+          },
+          "class": "Certificate",
+          "privateKey": {
+            "bigip": "self_demo.f5.com.pem"
+          }
+        },
+        "udf_demo_xff_1_irule_demo_vs": {
+          "class": "iRule",
+          "iRule": {
+            "base64": "d2hlbiBIVFRQX1JFUVVFU1Qgew0KICAgICNsb2cgbG9jYWwwLiAiaGVsbG8gd29ybGQiDQogICAgI2xvZyBsb2NhbDAuICJwYXRoOiBbSFRUUDo6dXJpXSINCiAgICBIVFRQOjpoZWFkZXIgaW5zZXJ0IFgtRm9yd2FyZGVkLUZvciBbSVA6OnJlbW90ZV9hZGRyXQ0KICAgIGlmIHsgW0hUVFA6OnVyaV0gZXEgIi90ZXN0In0gew0KICAgICAgICBIVFRQOjpyZXNwb25kIDIwMCBjb250ZW50IHsNCiAgICAgICAgICAgIDwhZG9jdHlwZSBodG1sPg0KICAgICAgICAgICAgICAgIDxoZWFkIGxhbmc9ImVuIj4NCiAgICAgICAgICAgICAgICA8bWV0YSBjaGFyc2V0PSJ1dGYtOCI+DQogICAgICAgICAgICAgICAgPHRpdGxlPlRlc3QgUGFnZTwvdGl0bGU+DQogICAgICAgICAgICA8L2hlYWQ+DQogICAgICAgICAgICA8Ym9keT4NCiAgICAgICAgICAgICAgICA8aDM+VGVzdCBQYWdlPC9oMz4NCiAgICAgICAgICAgIDwvYm9keT4NCiAgICAgICAgICAgIDwvaHRtbD4NCiAgICAgICAgfQ0KICAgIH0NCn0="
+          }
+        }
+      }
+    }
+  }
