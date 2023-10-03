@@ -163,7 +163,7 @@ Run through the following sequence of events:
 def as3_test():
     # Load v1 of the declaration from a file
     # declaration_v1_filename = "irule_demo_app001_04_v1.json"
-    declaration_v1_filename = "irule_demo_app001_04_v1.json"
+    declaration_v1_filename = "as3_declarations/irule_demo_app001_04_v1.json"
     print(f"\nReading AS3 declaration from '{declaration_v1_filename}'\n")
     v1_declaration = read_declaration(declaration_v1_filename)
 
@@ -202,7 +202,7 @@ def as3_test():
     input("Press Enter to continue with updating and redeploying the AS3 declaration\n")
 
     # Load v2 of the declaration from a file
-    declaration_v2_filename = "irule_demo_app001_04_v2.json"
+    declaration_v2_filename = "as3_declarations/irule_demo_app001_04_v2.json"
     print(f"\nReading AS3 declaration from '{declaration_v2_filename}'\n")
     v2_declaration = read_declaration(declaration_v2_filename)
 
