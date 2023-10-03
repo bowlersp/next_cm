@@ -74,16 +74,4 @@ These correlate to the following API resources, respectively:
 1. mgmt/shared/fast/appsvcs
 2. mgmt/shared/fast/appsvcs/{id}/deployments 
 
-When inspecting the JSON files included within `cm_ui_guided_fast_appsvc_creation`, you'll notice the disction between a FAST app service template and the deployment; pool member and virtual server information are provided separate from the template. Additionally, the target F5 BIG-IP Next instances are defined within the deployment.
-
-
-
- The `main()` function executes a basic workflow consisting of the following:
-
-1. **Read** AS3 declaration from a local file
-2. **Create** the AS3 declaration via the CM API (POST)
-3. **Deploy** the AS3 declaration to an F5 BIG-IP Next instance from
-   the CM API (POST)
-4. **Search** CM's AS3 declaration API for a specific tenant
-   and return the ID (GET)
-5. **Delete** the deployed declaration via ID (DELETE)
+When inspecting the JSON files included within `cm_ui_guided_fast_appsvc_creation`, you'll notice a disction between the FAST app service template and the deployment; pool member and virtual server information are provided separate from the template. Additionally, the target F5 BIG-IP Next instances are defined within the deployment.
