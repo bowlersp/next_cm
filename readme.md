@@ -75,3 +75,5 @@ These correlate to the following API resources, respectively:
 2. mgmt/shared/fast/appsvcs/{id}/deployments 
 
 When inspecting the JSON files included within `cm_ui_guided_fast_appsvc_creation`, you'll notice a disction between the FAST app service template and the deployment; pool member and virtual server information are provided separate from the template. Additionally, the target F5 BIG-IP Next instances are defined within the deployment.
+
+`single_step_appsvc_post.json` is a consolidation of steps 1-4 and allows that portion of the process to take place in a single POST, rather than an initial POST for creation followed by PATCHes to update the "draft" app service.
