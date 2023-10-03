@@ -1,5 +1,5 @@
 # AS3 Overview
-Use this script as a starting point for interacting with F5 BIG-IP Next Central Manager's (CM) AS3 feature API. The `main()` function executes a basic workflow consisting of the following:
+Use this script as a starting point for interacting with F5 BIG-IP Next Central Manager's (CM) AS3 feature API. The `as3_test()` function executes a basic workflow consisting of the following:
 
 1. **Read** AS3 declaration from a local file
 2. **Create** the AS3 declaration via the CM API (POST)
@@ -49,7 +49,7 @@ PASSWORD=theworstpassword
 Run the following command to initiate the CM API test sequence. The script will pause itself after deploying and self-validating the declaration exists, allowing for manual testing and validation prior to deletion.
 
 ```
-python3 cm_api_client.py
+python3 bigip_next_cm_api_client.py
 ```
 
 
@@ -74,6 +74,18 @@ These correlate to the following API resources, respectively:
 1. mgmt/shared/fast/appsvcs
 2. mgmt/shared/fast/appsvcs/{id}/deployments 
 
-When inspecting the JSON files included within `cm_ui_guided_fast_appsvc_creation`, you'll notice a disction between the FAST app service template and the deployment; pool member and virtual server information are provided separate from the template. Additionally, the target F5 BIG-IP Next instances are defined within the deployment.
+When inspecting the JSON files included within `fast_appsvcs`, you'll notice a disction between the FAST app service template and the deployment; pool member and virtual server information are provided separate from the template. Additionally, the target F5 BIG-IP Next instances are defined within the deployment.
 
-`single_step_appsvc_post.json` is a consolidation of steps 1-4 and allows that portion of the process to take place in a single POST, rather than an initial POST for creation followed by PATCHes to update the "draft" app service.
+`fast_appsvcs/single_step_appsvc_post.json` is a consolidation of steps 1-4 and allows that portion of the process to take place in a single POST, rather than an initial POST for creation followed by PATCHes to update the "draft" app service.
+
+`fast_appsvcs/single_step_appsvc_deployment.json` contains the deployment declaration for the FAST app service created from `fast_appsvcs/single_step_appsvc_post.json`.
+
+The `fast_appsvc_test()` function executes a basic workflow consisting of the following:
+
+1. **Read** FAST Application Service template and deployment declarations from local files
+2. **Create** the FAST Application Service via the CM API (POST)
+3. **Deploy** the FAST Application Service to an F5 BIG-IP Next instance from
+   the CM API (POST)
+4. **Search** CM's AS3 declaration API for a specific tenant
+   and return the ID (GET)
+5. **Delete** the deployed declaration via ID (DELETE)
