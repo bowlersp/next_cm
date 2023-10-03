@@ -232,13 +232,74 @@ def as3_test():
 
     # Pause the flow to allow validation within CM UI
     # or testing of the deployed declaration
-    input("Press Enter to continue with deletion of the AS3 declaration\n")
+    input(f"Press Enter to continue with deletion of AS3 declaration ID {declaration_id}\n")
 
     # Delete the declaration
     print(f"Deleting declaration with ID of {declaration_id}")
     deletion_message = delete_declaration(declaration_id)
     print(f"{declaration_id}: {deletion_message}\n")
 
+
+'''
+Search the FAST Application Services for a 
+specific name and return its ID
+'''
+def get_fast_appsvc_by_name(name):
+    uri = "/mgmt/shared/fast/appsvcs/"
+    status_code, r = api_call(endpoint=endpoint, method="get", uri=uri, access_token="", data="")
+
+    if "_embedded" in r:
+        appsvcs = r["_embedded"]["appsvcs"]
+        for appsvc in appsvcs:
+            if appsvc["tenant_name"] == name:
+                return True, appsvc["id"]
+
+    return False, f"Unable to find FAST Application Service with tenant name {name}"
+
+'''
+POST a FAST Application Service Template declaration to the CM API
+'''
+def post_fast_appsvc(declaration):
+    uri = "/mgmt/shared/fast/appsvcs/"
+    status_code, r = api_call(endpoint=endpoint, method="post", uri=uri, access_token="", data=declaration)
+    
+    if status_code == 400:
+        return False, r
+    elif status_code == 500:
+        return False, r["message"]
+    else:
+        return True, r["id"]
+
+'''
+PATCH a FAST Application Service Template declaration in the CM API
+'''
+def patch_fast_appsvc(fast_appsvc_id, declaration):
+    uri = f"/mgmt/shared/fast/appsvcs/{fast_appsvc_id}"
+    status_code, r = api_call(endpoint=endpoint, method="patch", uri=uri, access_token="", data=declaration)
+
+    return r["id"]
+
+'''
+DELETE a FAST Application Service Template declaration from the CM API
+'''
+def delete_fast_appsvc(fast_appsvc_id):
+    uri = f"/mgmt/shared/appsvcs/declare/{fast_appsvc_id}"
+    status_code, r = api_call(endpoint=endpoint, method="delete", uri=uri, access_token="")
+
+    return r["message"]
+
+'''
+Deploy a FAST Application Service to BIG-IP Next instances
+from the CM API
+'''
+def deploy_fast_appsvc(fast_appsvc_id, deployment):
+    uri = f"/mgmt/shared/fast/appsvcs/{fast_appsvc_id}/deployments"
+    status_code, r = api_call(endpoint=endpoint, method="post", uri=uri, access_token="", data=deployment)
+
+    if status_code == 202:
+        return True, r
+    else:
+        return False, r
 
 '''
 FAST Application Service Creation and Deployment Test Process
@@ -254,18 +315,52 @@ Run through the following sequence of events:
 5. Delete the deployed FAST appsvc via ID
 '''
 def fast_appsvc_test():
-    # Load v1 of the declaration from a file
-    # declaration_v1_filename = "irule_demo_app001_04_v1.json"
+    # Load the FAST Application Service template declaration from a file
     fast_appsvc_filename = "cm_ui_guided_fast_appsvc_creation/single_step_appsvc_post.json"
     print(f"\nReading AS3 declaration from '{fast_appsvc_filename}'\n")
     fast_appsvc_template = read_declaration(fast_appsvc_filename)
+
+    # Load the FAST Application Service deployment declaration from a file
+    fast_appsvc_deployment_filename = "cm_ui_guided_fast_appsvc_creation/single_step_appsvc_deployment.json"
+    print(f"\nReading AS3 declaration from '{fast_appsvc_deployment_filename}'\n")
+    fast_appsvc_deployment = read_declaration(fast_appsvc_deployment_filename)
+
+    # The creation of a FAST Application Service
+    print("Sending FAST Application Service template declaration to CM API")
+    fast_appsvc_created, fast_appsvc_id = post_fast_appsvc(fast_appsvc_template)
+    if fast_appsvc_created:
+        print(f"FAST Application Service with ID {fast_appsvc_id} has been created\n")
+    else:
+        print(f"FAST Application Service creation failed with message: {fast_appsvc_id}")
+        return
+    
+    print(f"Deploying FAST Application Service ID {fast_appsvc_id}")
+    fast_appsvc_deploy_success, fast_appsvc_deply_message = deploy_fast_appsvc(fast_appsvc_id, fast_appsvc_deployment)
+    if fast_appsvc_deploy_success:
+        print(f"FAST Application Deployment succeeded with result: {fast_appsvc_deply_message}\n")
+    else:
+        print(f"FAST Application Deployment failed with message: {fast_appsvc_deply_message}")
+
+    # Execute a brief pause while the template declaration is consumed and deployed
+    sleep(2)
+
+    # Pause the flow to allow validation within CM UI
+    # or testing of the deployed declaration
+    input(f"Press Enter to continue with deletion of FAST Application Service ID {fast_appsvc_id}\n")
+
+    # Delete the FAST Application Service and Deployments
+    print(f"Deleting FAST Application Service with ID of {fast_appsvc_id}")
+    fast_appsvc_deletion_message = delete_fast_appsvc(fast_appsvc_id)
+    print(f"{fast_appsvc_id}: {fast_appsvc_deletion_message}\n")
 
 def main():
     # Uncomment the as3_test() line to run the AS3 Declaration API test
     # as3_test()
 
     # Uncomment the fast_appsvc_test() line to run the FAST Application Service API test
-    # fast_appsvc_test()
+    fast_appsvc_test()
 
     print("Script end")
     exit()
+
+main()
