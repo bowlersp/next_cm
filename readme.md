@@ -56,12 +56,12 @@ python3 cm_as3_test.py
 ## Fast Application Service (AppSvc) Overview
 Use this information as a starting point for interacting with F5 BIG-IP Next CM's FAST Application Service API. The source of JSON files and process was obtained by utilizing Chrome's network developer tools and tracing the API calls. The high-level scenario steps are as follows:
 
-1. Start FAST Application Service creation process via CM UI (POST)
+1. Start standard FAST Application Service creation process via CM UI (POST)
 2. Define a pool name and service port (PATCH)
 3. Define a virtual server name and reference pool (PATCH)
 4. Add an iRule to the virtual server / application service (PATCH)
 5. Perform Review and Deploy (PATCH)
-6. Validate application service (POST)
+6. Validate application service (POST [query `?dry_run=true]`)
 7. Deploy application service (POST)
 
 There are two distinct parts of this process:
