@@ -149,17 +149,18 @@ def deploy_declaration(declaration_id, instances):
         return False, f"{success_count} of {instance_count} were successful. The following failed: {', '.join(failed_instances)}"
 
 '''
+AS3 Declaration Creation and Deployment Test Process
 Run through the following sequence of events:
 
 1. Read AS3 declaration from a local file
 2. POST the AS3 declaration to the CM API
-3. Deploy the AS3 declaration to a Next instance from
+3. Deploy the AS3 declaration to a Next instance via
    the CM API
 4. Search CM's AS3 declarations for a specific tenant
    and return the ID
 5. Delete the deployed declaration via ID
 '''
-def main():
+def as3_test():
     # Load v1 of the declaration from a file
     # declaration_v1_filename = "irule_demo_app001_04_v1.json"
     declaration_v1_filename = "irule_demo_app001_04_v1.json"
@@ -213,7 +214,8 @@ def main():
 
     # Execute a brief pause while the declaration is consumed and deployed
     sleep(2)
-
+    
+    '''
     # Deploy v2 of the AS3 declaration
     # This is commented out because currently it does not appear
     # this is the proper way to redeploy a declaration, as a response of
@@ -226,7 +228,7 @@ def main():
     # print(f"Deploying v2 of AS3 declaration ID {declaration_id} to {', '.join(instances)}")
     # deploy_result = deploy_declaration(declaration_id, instances)
     # print(f"Deployment result: {deploy_result}\n")
-    #
+    '''
 
     # Pause the flow to allow validation within CM UI
     # or testing of the deployed declaration
@@ -238,4 +240,32 @@ def main():
     print(f"{declaration_id}: {deletion_message}\n")
 
 
-main()
+'''
+FAST Application Service Creation and Deployment Test Process
+
+Run through the following sequence of events:
+
+1. Read a FAST Application Service (appsvc) template from a local file
+2. POST the FAST appsvc template to the CM API
+3. Deploy the FAST appsvc template to a Next instance via
+   the CM API
+4. Search CM's FAST appsvc API for a specific name
+   and return the ID
+5. Delete the deployed FAST appsvc via ID
+'''
+def fast_appsvc_test():
+    # Load v1 of the declaration from a file
+    # declaration_v1_filename = "irule_demo_app001_04_v1.json"
+    fast_appsvc_filename = "cm_ui_guided_fast_appsvc_creation/single_step_appsvc_post.json"
+    print(f"\nReading AS3 declaration from '{fast_appsvc_filename}'\n")
+    fast_appsvc_template = read_declaration(fast_appsvc_filename)
+
+def main():
+    # Uncomment the as3_test() line to run the AS3 Declaration API test
+    # as3_test()
+
+    # Uncomment the fast_appsvc_test() line to run the FAST Application Service API test
+    # fast_appsvc_test()
+
+    print("Script end")
+    exit()
