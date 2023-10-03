@@ -1,5 +1,5 @@
-## Overview
-Use this script as a starting point for interacting with the F5 BIG-IP Next Central Manager (CM) API. The `main()` function executes a basic workflow consisting of the following:
+## AS3 Overview
+Use this script as a starting point for interacting with F5 BIG-IP Next Central Manager's (CM) AS3 feature API. The `main()` function executes a basic workflow consisting of the following:
 
 1. **Read** AS3 declaration from a local file
 2. **Create** the AS3 declaration via the CM API (POST)
@@ -51,3 +51,27 @@ Run the following command to initiate the CM API test sequence. The script will 
 ```
 python3 cm_as3_test.py
 ```
+
+
+## Fast Application Service (AppSvc) Overview
+Use this information as a starting point for interacting with F5 BIG-IP Next CM's FAST Application Service API. The source of JSON files and process was obtained by utilizing Chrome's network developer tools and tracing the API calls. The high-level scenario steps are as follows:
+
+1. Start standard FAST Application Service creation process via CM UI (POST)
+2. Define a pool name and service port (PATCH)
+3. Define a virtual server name and reference pool (PATCH)
+4. Add an iRule to the virtual server / application service (PATCH)
+5. Perform Review and Deploy (PATCH)
+6. Validate application service (POST [query `?dry_run=true]`)
+7. Deploy application service (POST)
+
+There are two distinct parts of this process:
+
+1. Constructing the FAST app service (Steps 1-5)
+2. Deploying the FAST app service (Steps 6-7)
+
+These correlate to the following API resources, respectively:
+
+1. mgmt/shared/fast/appsvcs
+2. mgmt/shared/fast/appsvcs/{id}/deployments 
+
+When inspecting the JSON files included within `cm_ui_guided_fast_appsvc_creation`, you'll notice a disction between the FAST app service template and the deployment; pool member and virtual server information are provided separate from the template. Additionally, the target F5 BIG-IP Next instances are defined within the deployment.
