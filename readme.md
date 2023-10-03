@@ -1,4 +1,4 @@
-## AS3 Overview
+# AS3 Overview
 Use this script as a starting point for interacting with F5 BIG-IP Next Central Manager's (CM) AS3 feature API. The `main()` function executes a basic workflow consisting of the following:
 
 1. **Read** AS3 declaration from a local file
@@ -53,7 +53,7 @@ python3 cm_api_client.py
 ```
 
 
-## Fast Application Service (AppSvc) Overview
+# Fast Application Service (AppSvc) Overview
 Use this information as a starting point for interacting with F5 BIG-IP Next CM's FAST Application Service API. The source of JSON files and process was obtained by utilizing Chrome's network developer tools and tracing the API calls. The high-level scenario steps are as follows:
 
 1. Start standard FAST Application Service creation process via CM UI (POST)
