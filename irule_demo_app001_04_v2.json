@@ -35,7 +35,7 @@
             "http"
           ]
         },
-        "irule_demo_vs": {
+        "irule_demo_vs001": {
           "class": "Service_HTTPS",
           "iRules": [
             "udf_demo_xff_1_irule_demo_vs"

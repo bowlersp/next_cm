@@ -1,0 +1,10 @@
+{
+    "name": "irule_demo_app001",
+    "template_name": "http",
+    "set_name": "Examples",
+    "parameters": {
+        "application_name": "irule_demo_app001",
+        "application_description": ""
+    },
+    "allowOverwrite": true
+}
