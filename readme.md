@@ -53,7 +53,7 @@ python3 bigip_next_cm_api_client.py
 ```
 
 
-# Fast Application Service (AppSvc) Overview
+# FAST Application Service (AppSvc) Overview
 Use this information as a starting point for interacting with F5 BIG-IP Next CM's FAST Application Service API. The source of JSON files and process was obtained by utilizing Chrome's network developer tools and tracing the API calls. The high-level scenario steps are as follows:
 
 1. Start standard FAST Application Service creation process via CM UI (POST)
