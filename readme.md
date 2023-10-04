@@ -1,6 +1,4 @@
-```
-Note to readers: This documentation, scripting, and JSON files have formulated around F5 BIG-IP Next v20.0.1
-```
+> **Note to readers**: This documentation, scripting, and JSON files have formulated around F5 BIG-IP Next v20.0.1
 
 # AS3 Overview
 Use this script as a starting point for interacting with F5 BIG-IP Next Central Manager's (CM) AS3 feature API. The `as3_test()` function executes a basic workflow consisting of the following:
