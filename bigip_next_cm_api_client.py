@@ -1,3 +1,27 @@
+'''
+F5 BIG-IP Next Central Manager API Client Test Script
+
+This simple API client seeks to demonstrate the following features:
+
+ - AS3 declaration creation, deployment, and deletion
+ - FAST application service creation, deployment, and deletion
+
+The main() function contains code which triggers AS3 and FAST tests.
+The tests currently supported are:
+
+ - as3_test()
+ - fast_appsvc_test()
+
+More detailed information about test functions may be found in front of
+their respective code blocks.
+
+This flat script is meant to serve as an introduction to managing 
+F5 BIG-IP Next instances via the Central Manager API. Ideally, this should
+be converted into a class / library so that its functionalitymay be
+referenced within other Python scripts, easing integration with
+pre-existing Python-oriented automation processes.
+'''
+
 import os
 from dotenv import load_dotenv
 import requests
@@ -162,7 +186,6 @@ Run through the following sequence of events:
 '''
 def as3_test():
     # Load v1 of the declaration from a file
-    # declaration_v1_filename = "irule_demo_app001_04_v1.json"
     declaration_v1_filename = "as3_declarations/irule_demo_app001_04_v1.json"
     print(f"\nReading AS3 declaration from '{declaration_v1_filename}'\n")
     v1_declaration = read_declaration(declaration_v1_filename)
@@ -358,7 +381,7 @@ def main():
     # as3_test()
 
     # Uncomment the fast_appsvc_test() line to run the FAST Application Service API test
-    fast_appsvc_test()
+    # fast_appsvc_test()
 
     print("Script end")
     exit()
