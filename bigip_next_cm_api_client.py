@@ -16,10 +16,10 @@ More detailed information about test functions may be found in front of
 their respective code blocks.
 
 This flat script is meant to serve as an introduction to managing 
-F5 BIG-IP Next instances via the Central Manager API. Ideally, this should
-be converted into a class / library so that its functionalitymay be
-referenced within other Python scripts, easing integration with
-pre-existing Python-oriented automation processes.
+F5 BIG-IP Next application service deployments via the Central Manager API.
+Ideally, this should be converted into a class / library so that its
+functionality may be referenced within other Python scripts, easing integration
+with pre-existing Python-oriented automation processes.
 '''
 
 import os
