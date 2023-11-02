@@ -1,5 +1,20 @@
 > **Note to readers**: This documentation, scripting, and JSON files have formulated around F5 BIG-IP Next v20.0.1
 
+# Prerequisites
+Create a local file named `.env` in the same directory as the `bigip_next_cm_api_client.py` file and populate it with the following variables:
+
+- `ENDPOINT`
+- `USERNAME`
+- `PASSWORD`
+
+The file contents should resemble the following:
+
+```
+ENDPOINT=testcmapi.f5demo.com
+USERNAME=thebestusername
+PASSWORD=theworstpassword
+```
+
 # AS3 Overview
 Use this script as a starting point for interacting with F5 BIG-IP Next Central Manager's (CM) AS3 feature API. The `as3_test()` function executes a basic workflow consisting of the following:
 
@@ -31,21 +46,6 @@ The pool members do not appear under the App Service topology view in the CM UI.
 
 
 In its current state, the script, when run, will execute a static series of events, due to the fact its designed simply to execute the `main()` function and its contents. The script could, and should, be improved to accept command-line arguments which can be passed in, such as `filename` and `instances`. This would make the script more useable and dynamic rather than fixed and static.
-
-## Prerequisites
-Create a local file in the same directory as the project named `.env` and populate it with the following variables:
-
-- `ENDPOINT`
-- `USERNAME`
-- `PASSWORD`
-
-The file contents should resemble the following:
-
-```
-ENDPOINT=testcmapi.f5demo.com
-USERNAME=thebestusername
-PASSWORD=theworstpassword
-```
 
 ## Script Execution
 Run the following command to initiate the CM API test sequence. The script will pause itself after deploying and self-validating the declaration exists, allowing for manual testing and validation prior to deletion.
