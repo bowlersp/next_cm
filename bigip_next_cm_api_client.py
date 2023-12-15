@@ -381,7 +381,7 @@ def main():
     # as3_test()
 
     # Uncomment the fast_appsvc_test() line to run the FAST Application Service API test
-    # fast_appsvc_test()
+    fast_appsvc_test()
 
     print("Script end")
     exit()
