@@ -42,7 +42,7 @@
                 "enable_mirroring": true,
                 "enable_TLS_Client": false,
                 "enable_WAF": false,
-                "enable_iRules": true,
+                "enable_iRules": false,
                 "virtualPort": 80,
                 "virtualName": "juiceshop_vs",
                 "pool": "juiceshop_pool"
