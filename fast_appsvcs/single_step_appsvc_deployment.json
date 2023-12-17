@@ -16,7 +16,7 @@
                 "virtuals": [
                     {
                         "virtualName": "juiceshop_vs",
-                        "virtualAddress": "10.1.10.101"
+                        "virtualAddress": "10.1.10.103"
                     }
                 ]
             },

@@ -1,5 +1,5 @@
 {
-    "name": "juiceshop_app_v2",
+    "name": "juiceshop_app_v3",
     "template_name": "http",
     "set_name": "Examples",
     "parameters": {
@@ -49,7 +49,7 @@
             }
         ],
         "application_description": "",
-        "application_name": "juiceshop_app_v2"
+        "application_name": "juiceshop_app_v3"
     },
     "allowOverwrite": true
 }
