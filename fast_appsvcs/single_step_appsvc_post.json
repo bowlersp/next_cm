@@ -15,6 +15,7 @@
         ],
         "virtuals": [
             {
+                "iRulesEnum": [],
                 "ciphers": "DEFAULT",
                 "enable_Access": false,
                 "tls_c_1_2": true,
