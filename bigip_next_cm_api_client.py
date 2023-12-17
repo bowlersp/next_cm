@@ -116,6 +116,7 @@ POST an AS3 declaration to the CM API
 def post_declaration(declaration):
     uri = "/mgmt/shared/appsvcs/declare"
     status_code, r = api_call(endpoint=endpoint, method="post", uri=uri, access_token="", data=declaration)
+    print(f"r ::: {r}")
     
     if status_code == 400:
         return False, r
@@ -285,6 +286,7 @@ POST a FAST Application Service Template declaration to the CM API
 def post_fast_appsvc(declaration):
     uri = "/mgmt/shared/fast/appsvcs/"
     status_code, r = api_call(endpoint=endpoint, method="post", uri=uri, access_token="", data=declaration)
+    print(f"post_fast_appsvc ::: {r}")
     
     if status_code == 400:
         return False, r
@@ -318,6 +320,7 @@ from the CM API
 def deploy_fast_appsvc(fast_appsvc_id, deployment):
     uri = f"/mgmt/shared/fast/appsvcs/{fast_appsvc_id}/deployments"
     status_code, r = api_call(endpoint=endpoint, method="post", uri=uri, access_token="", data=deployment)
+    print(f"deploy_fast_appsvc ::: {r}")
 
     if status_code == 202:
         return True, r
