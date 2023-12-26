@@ -47,6 +47,11 @@ username = os.getenv("USERNAME")
 password = os.getenv("PASSWORD")
 
 '''
+Set the allowed HTTP methods
+'''
+ALLOWED_METHODS = ["get", "patch", "put", "post", "delete"]
+
+'''
 Read the contents of a file containing an AS3
 declaration, then convert it to a JSON object
 '''
@@ -62,7 +67,7 @@ function so that login / access token obtainment and REST
 method executions are handled consistently.
 '''
 def api_call(endpoint, method, uri, access_token, data=None):
-    if method in ["get", "patch", "put", "post", "delete"]:
+    if method in ALLOWED_METHODS:
         headers = {"Content-Type": "application/json"}
 
         # If no access token is provided, attempt to obtain
@@ -381,7 +386,7 @@ def fast_appsvc_test():
     # Delete the FAST Application Service and Deployments
     print(f"Deleting FAST Application Service with ID of {fast_appsvc_id}")
     fast_appsvc_deletion_message = delete_fast_appsvc(fast_appsvc_id)
-    print(f"{fast_appsvc_id}: {fast_appsvc_deletion_message}\n")
+    print(f"FAST Deployment Deletion Response: {fast_appsvc_deletion_message}\n")
 
 def main():
     # Uncomment the as3_test() line to run the AS3 Declaration API test
