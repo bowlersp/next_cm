@@ -402,7 +402,7 @@ def fast_appsvc_test():
 
     # Pause the flow to allow validation within CM UI
     # or testing of the deployed declaration
-    input(f"Press Enter to continue with deletion of FAST Application Service ID {fast_appsvc_id}\n")
+    input(f"Press {color.BOLD}Enter{color.END} to continue with deletion of FAST Application Service ID {fast_appsvc_id}\n")
 
     # Delete the FAST Application Service and Deployments
     print(f"{color.UNDERLINE}Deleting FAST Application Service with ID of{color.END} {fast_appsvc_id}")
