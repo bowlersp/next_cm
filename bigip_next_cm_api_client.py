@@ -382,7 +382,7 @@ def fast_appsvc_test():
     print(f"{color.UNDERLINE}Sending FAST Application Service template declaration to CM API{color.END}")
     fast_appsvc_created, fast_appsvc_id = post_fast_appsvc(fast_appsvc_template)
     if fast_appsvc_created:
-        print(f"FAST Application Service with ID {fast_appsvc_id} has been created\n")
+        print(f"{color.BOLD}FAST Application Service with ID{color.END} {fast_appsvc_id} {color.BOLD}has been created{color.END}\n")
     else:
         print(f"FAST Application Service creation failed with message: {fast_appsvc_id}")
         return
