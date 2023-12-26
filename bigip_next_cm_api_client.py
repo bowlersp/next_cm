@@ -389,10 +389,10 @@ def fast_appsvc_test():
     
     print(f"{color.UNDERLINE}Deploying FAST Application Service ID{color.END} {fast_appsvc_id}")
     fast_appsvc_deploy_success, fast_appsvc_deply_message = deploy_fast_appsvc(fast_appsvc_id, fast_appsvc_deployment)
-    if fast_appsvc_deploy_success:
-        print(f"{color.UNDERLINE}FAST Application Deployment succeeded with result:{color.END}\n{json_pp(fast_appsvc_deply_message)}\n")
-    else:
-        print(f"FAST Application Deployment failed with message: {fast_appsvc_deply_message}")
+    # if fast_appsvc_deploy_success:
+    #     print(f"{color.UNDERLINE}FAST Application Deployment succeeded with result:{color.END}\n{json_pp(fast_appsvc_deply_message)}\n")
+    # else:
+    #     print(f"FAST Application Deployment failed with message: {fast_appsvc_deply_message}")
 
     # Execute a brief pause while the template declaration is consumed and deployed
     sleep(2)
@@ -404,7 +404,7 @@ def fast_appsvc_test():
     # Delete the FAST Application Service and Deployments
     print(f"{color.UNDERLINE}Deleting FAST Application Service with ID of{color.END} {fast_appsvc_id}")
     fast_appsvc_deletion_message = delete_fast_appsvc(fast_appsvc_id)
-    print(f"{color.UNDERLINE}FAST Deployment Deletion Response:{color.END}\n{json_pp(fast_appsvc_deletion_message)}\n")
+    # print(f"{color.UNDERLINE}FAST Deployment Deletion Response:{color.END}\n{json_pp(fast_appsvc_deletion_message)}\n")
 
 def main():
     # Uncomment the as3_test() line to run the AS3 Declaration API test
