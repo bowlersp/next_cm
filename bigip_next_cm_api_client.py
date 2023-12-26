@@ -347,7 +347,7 @@ from the CM API
 def deploy_fast_appsvc(fast_appsvc_id, deployment):
     uri = f"/mgmt/shared/fast/appsvcs/{fast_appsvc_id}/deployments"
     status_code, r = api_call(endpoint=endpoint, method="post", uri=uri, access_token="", data=deployment)
-    print(f"deploy_fast_appsvc:\n{json_pp(r)}\n")
+    print(f"{color.BOLD}{color.CYAN}deploy_fast_appsvc:{color.END}\n{json_pp(r)}\n")
 
     if status_code == 202:
         return True, r
@@ -387,10 +387,10 @@ def fast_appsvc_test():
         print(f"FAST Application Service creation failed with message: {fast_appsvc_id}")
         return
     
-    print(f"{color.BOLD}Deploying FAST Application Service ID{color.END} {fast_appsvc_id}")
+    print(f"{color.UNDERLINE}Deploying FAST Application Service ID{color.END} {fast_appsvc_id}")
     fast_appsvc_deploy_success, fast_appsvc_deply_message = deploy_fast_appsvc(fast_appsvc_id, fast_appsvc_deployment)
     if fast_appsvc_deploy_success:
-        print(f"FAST Application Deployment succeeded with result:\n{json_pp(fast_appsvc_deply_message)}\n")
+        print(f"{color.BOLD}FAST Application Deployment succeeded with result:{color.END}\n{json_pp(fast_appsvc_deply_message)}\n")
     else:
         print(f"FAST Application Deployment failed with message: {fast_appsvc_deply_message}")
 
@@ -402,9 +402,9 @@ def fast_appsvc_test():
     input(f"Press Enter to continue with deletion of FAST Application Service ID {fast_appsvc_id}\n")
 
     # Delete the FAST Application Service and Deployments
-    print(f"Deleting FAST Application Service with ID of {fast_appsvc_id}")
+    print(f"{color.BOLD}Deleting FAST Application Service with ID of{color.END} {fast_appsvc_id}")
     fast_appsvc_deletion_message = delete_fast_appsvc(fast_appsvc_id)
-    print(f"FAST Deployment Deletion Response:\n{json_pp(fast_appsvc_deletion_message)}\n")
+    print(f"{color.UNDERLINE}FAST Deployment Deletion Response:{color.END}\n{json_pp(fast_appsvc_deletion_message)}\n")
 
 def main():
     # Uncomment the as3_test() line to run the AS3 Declaration API test
