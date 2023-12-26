@@ -28,6 +28,9 @@ import requests
 import json
 from time import sleep
 
+# Silence HTTPS verification warning messages
+requests.packages.urllib3.disable_warnings()
+
 '''
 Load environment variables from the .env file
 
