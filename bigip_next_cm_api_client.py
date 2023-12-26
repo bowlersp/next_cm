@@ -312,7 +312,7 @@ POST a FAST Application Service Template declaration to the CM API
 def post_fast_appsvc(declaration):
     uri = "/mgmt/shared/fast/appsvcs/"
     status_code, r = api_call(endpoint=endpoint, method="post", uri=uri, access_token="", data=declaration)
-    print(f"{color.BOLD}{color.CYAN}post_fast_appsvc:{color.END}\n{json_pp(r)}\n")
+    print(f"{color.BOLD}{color.CYAN}post_fast_appsvc Response:{color.END}\n{json_pp(r)}\n")
     
     if status_code == 400:
         return False, r
@@ -337,7 +337,7 @@ def delete_fast_appsvc(fast_appsvc_id):
     uri =f"/mgmt/shared/fast/appsvcs/{fast_appsvc_id}"
     # uri = f"/mgmt/shared/appsvcs/declare/{fast_appsvc_id}"
     status_code, r = api_call(endpoint=endpoint, method="delete", uri=uri, access_token="")
-    print(f"{color.BOLD}{color.CYAN}delete_fast_appsvc:{color.END}\n{json_pp(r)}\n")
+    print(f"{color.BOLD}{color.CYAN}delete_fast_appsvc Response:{color.END}\n{json_pp(r)}\n")
     return r#["message"]
 
 '''
@@ -347,7 +347,7 @@ from the CM API
 def deploy_fast_appsvc(fast_appsvc_id, deployment):
     uri = f"/mgmt/shared/fast/appsvcs/{fast_appsvc_id}/deployments"
     status_code, r = api_call(endpoint=endpoint, method="post", uri=uri, access_token="", data=deployment)
-    print(f"{color.BOLD}{color.CYAN}deploy_fast_appsvc:{color.END}\n{json_pp(r)}\n")
+    print(f"{color.BOLD}{color.CYAN}deploy_fast_appsvc Response:{color.END}\n{json_pp(r)}\n")
 
     if status_code == 202:
         return True, r
