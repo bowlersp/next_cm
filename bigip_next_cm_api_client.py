@@ -387,6 +387,9 @@ def fast_appsvc_test():
         print(f"FAST Application Service creation failed with message: {fast_appsvc_id}")
         return
     
+    input(f"Press {color.BOLD}Enter{color.END} to deploy FAST Application Service ID {fast_appsvc_id}\n")
+
+    
     print(f"{color.UNDERLINE}Deploying FAST Application Service ID{color.END} {fast_appsvc_id}")
     fast_appsvc_deploy_success, fast_appsvc_deply_message = deploy_fast_appsvc(fast_appsvc_id, fast_appsvc_deployment)
     # if fast_appsvc_deploy_success:
