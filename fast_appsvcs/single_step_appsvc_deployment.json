@@ -8,7 +8,11 @@
                         "poolMembers": [
                             {
                                 "name": "node1",
-                                "address": "10.1.20.30"
+                                "address": "10.1.20.100"
+                            },
+                            {
+                                "name": "node2",
+                                "address": "10.1.20.101"
                             }
                         ]
                     }
@@ -21,7 +25,7 @@
                 ]
             },
             "target": {
-                "address": "10.1.1.4"
+                "address": "10.1.1.7"
             },
             "allow_overwrite": true
         }
