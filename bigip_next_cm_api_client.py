@@ -289,7 +289,7 @@ POST a FAST Application Service Template declaration to the CM API
 def post_fast_appsvc(declaration):
     uri = "/mgmt/shared/fast/appsvcs/"
     status_code, r = api_call(endpoint=endpoint, method="post", uri=uri, access_token="", data=declaration)
-    print(f"post_fast_appsvc ::: {r}")
+    print(f"post_fast_appsvc ::: {r}\n")
     
     if status_code == 400:
         return False, r
@@ -314,8 +314,8 @@ def delete_fast_appsvc(fast_appsvc_id):
     uri =f"/mgmt/shared/fast/appsvcs/{fast_appsvc_id}"
     # uri = f"/mgmt/shared/appsvcs/declare/{fast_appsvc_id}"
     status_code, r = api_call(endpoint=endpoint, method="delete", uri=uri, access_token="")
-
-    return r["message"]
+    print(f"delete_fast_appsvc ::: {r}\n")
+    return r#["message"]
 
 '''
 Deploy a FAST Application Service to BIG-IP Next instances
@@ -324,7 +324,7 @@ from the CM API
 def deploy_fast_appsvc(fast_appsvc_id, deployment):
     uri = f"/mgmt/shared/fast/appsvcs/{fast_appsvc_id}/deployments"
     status_code, r = api_call(endpoint=endpoint, method="post", uri=uri, access_token="", data=deployment)
-    print(f"deploy_fast_appsvc ::: {r}")
+    print(f"deploy_fast_appsvc ::: {r}\n")
 
     if status_code == 202:
         return True, r
