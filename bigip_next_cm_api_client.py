@@ -55,8 +55,7 @@ ALLOWED_METHODS = ["get", "patch", "put", "post", "delete"]
 Prettify JSON output
 '''
 def json_pp(data):
-    json_object = json.loads(data)
-    return json.dumps(json_object, indent=2)
+    return json.dumps(data, indent=2)
     
 
 '''
