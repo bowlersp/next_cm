@@ -379,7 +379,7 @@ def fast_appsvc_test():
     fast_appsvc_deployment = read_declaration(fast_appsvc_deployment_filename)
 
     # The creation of a FAST Application Service
-    print("Sending FAST Application Service template declaration to CM API")
+    print(f"{color.UNDERLINE}Sending FAST Application Service template declaration to CM API{color.END}")
     fast_appsvc_created, fast_appsvc_id = post_fast_appsvc(fast_appsvc_template)
     if fast_appsvc_created:
         print(f"FAST Application Service with ID {fast_appsvc_id} has been created\n")
