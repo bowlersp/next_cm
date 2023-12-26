@@ -390,7 +390,7 @@ def fast_appsvc_test():
     print(f"{color.UNDERLINE}Deploying FAST Application Service ID{color.END} {fast_appsvc_id}")
     fast_appsvc_deploy_success, fast_appsvc_deply_message = deploy_fast_appsvc(fast_appsvc_id, fast_appsvc_deployment)
     if fast_appsvc_deploy_success:
-        print(f"{color.BOLD}FAST Application Deployment succeeded with result:{color.END}\n{json_pp(fast_appsvc_deply_message)}\n")
+        print(f"{color.UNDERLINE}FAST Application Deployment succeeded with result:{color.END}\n{json_pp(fast_appsvc_deply_message)}\n")
     else:
         print(f"FAST Application Deployment failed with message: {fast_appsvc_deply_message}")
 
@@ -402,7 +402,7 @@ def fast_appsvc_test():
     input(f"Press Enter to continue with deletion of FAST Application Service ID {fast_appsvc_id}\n")
 
     # Delete the FAST Application Service and Deployments
-    print(f"{color.BOLD}Deleting FAST Application Service with ID of{color.END} {fast_appsvc_id}")
+    print(f"{color.UNDERLINE}Deleting FAST Application Service with ID of{color.END} {fast_appsvc_id}")
     fast_appsvc_deletion_message = delete_fast_appsvc(fast_appsvc_id)
     print(f"{color.UNDERLINE}FAST Deployment Deletion Response:{color.END}\n{json_pp(fast_appsvc_deletion_message)}\n")
 
