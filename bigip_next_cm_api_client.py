@@ -52,6 +52,14 @@ Set the allowed HTTP methods
 ALLOWED_METHODS = ["get", "patch", "put", "post", "delete"]
 
 '''
+Prettify JSON output
+'''
+def json_pp(data):
+    json_object = json.loads(data)
+    return json.dumps(json_object, indent=2)
+    
+
+'''
 Read the contents of a file containing an AS3
 declaration, then convert it to a JSON object
 '''
@@ -294,7 +302,7 @@ POST a FAST Application Service Template declaration to the CM API
 def post_fast_appsvc(declaration):
     uri = "/mgmt/shared/fast/appsvcs/"
     status_code, r = api_call(endpoint=endpoint, method="post", uri=uri, access_token="", data=declaration)
-    print(f"post_fast_appsvc ::: {r}\n")
+    print(f"post_fast_appsvc ::: {json_pp(r)}\n")
     
     if status_code == 400:
         return False, r
