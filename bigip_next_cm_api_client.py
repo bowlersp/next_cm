@@ -367,7 +367,7 @@ def fast_appsvc_test():
     print(f"Deploying FAST Application Service ID {fast_appsvc_id}")
     fast_appsvc_deploy_success, fast_appsvc_deply_message = deploy_fast_appsvc(fast_appsvc_id, fast_appsvc_deployment)
     if fast_appsvc_deploy_success:
-        print(f"FAST Application Deployment succeeded with result: {fast_appsvc_deply_message}\n")
+        print(f"FAST Application Deployment succeeded with result:\n{fast_appsvc_deply_message}\n")
     else:
         print(f"FAST Application Deployment failed with message: {fast_appsvc_deply_message}")
 
