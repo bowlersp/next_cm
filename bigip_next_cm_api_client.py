@@ -370,12 +370,12 @@ Run through the following sequence of events:
 def fast_appsvc_test():
     # Load the FAST Application Service template declaration from a file
     fast_appsvc_filename = "fast_appsvcs/single_step_appsvc_post.json"
-    print(f"\nReading AS3 declaration from '{fast_appsvc_filename}'\n")
+    print(f"\n{color.BOLD}Reading AS3 declaration from{color.END} '{fast_appsvc_filename}'\n")
     fast_appsvc_template = read_declaration(fast_appsvc_filename)
 
     # Load the FAST Application Service deployment declaration from a file
     fast_appsvc_deployment_filename = "fast_appsvcs/single_step_appsvc_deployment.json"
-    print(f"\nReading AS3 declaration from '{fast_appsvc_deployment_filename}'\n")
+    print(f"\n{color.BOLD}Reading AS3 declaration from{color.END} '{fast_appsvc_deployment_filename}'\n")
     fast_appsvc_deployment = read_declaration(fast_appsvc_deployment_filename)
 
     # The creation of a FAST Application Service
@@ -387,7 +387,7 @@ def fast_appsvc_test():
         print(f"FAST Application Service creation failed with message: {fast_appsvc_id}")
         return
     
-    print(f"Deploying FAST Application Service ID {fast_appsvc_id}")
+    print(f"{color.BOLD}Deploying FAST Application Service ID{color.END} {fast_appsvc_id}")
     fast_appsvc_deploy_success, fast_appsvc_deply_message = deploy_fast_appsvc(fast_appsvc_id, fast_appsvc_deployment)
     if fast_appsvc_deploy_success:
         print(f"FAST Application Deployment succeeded with result:\n{json_pp(fast_appsvc_deply_message)}\n")
