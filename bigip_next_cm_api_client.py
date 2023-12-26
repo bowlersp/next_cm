@@ -301,7 +301,7 @@ POST a FAST Application Service Template declaration to the CM API
 def post_fast_appsvc(declaration):
     uri = "/mgmt/shared/fast/appsvcs/"
     status_code, r = api_call(endpoint=endpoint, method="post", uri=uri, access_token="", data=declaration)
-    print(f"post_fast_appsvc ::: {json_pp(r)}\n")
+    print(f"post_fast_appsvc:\n{json_pp(r)}\n")
     
     if status_code == 400:
         return False, r
@@ -326,7 +326,7 @@ def delete_fast_appsvc(fast_appsvc_id):
     uri =f"/mgmt/shared/fast/appsvcs/{fast_appsvc_id}"
     # uri = f"/mgmt/shared/appsvcs/declare/{fast_appsvc_id}"
     status_code, r = api_call(endpoint=endpoint, method="delete", uri=uri, access_token="")
-    print(f"delete_fast_appsvc ::: {r}\n")
+    print(f"delete_fast_appsvc:\n{json_pp(r)}\n")
     return r#["message"]
 
 '''
@@ -336,7 +336,7 @@ from the CM API
 def deploy_fast_appsvc(fast_appsvc_id, deployment):
     uri = f"/mgmt/shared/fast/appsvcs/{fast_appsvc_id}/deployments"
     status_code, r = api_call(endpoint=endpoint, method="post", uri=uri, access_token="", data=deployment)
-    print(f"deploy_fast_appsvc ::: {r}\n")
+    print(f"deploy_fast_appsvc:\n{json_pp(r)}\n")
 
     if status_code == 202:
         return True, r
@@ -379,7 +379,7 @@ def fast_appsvc_test():
     print(f"Deploying FAST Application Service ID {fast_appsvc_id}")
     fast_appsvc_deploy_success, fast_appsvc_deply_message = deploy_fast_appsvc(fast_appsvc_id, fast_appsvc_deployment)
     if fast_appsvc_deploy_success:
-        print(f"FAST Application Deployment succeeded with result:\n{fast_appsvc_deply_message}\n")
+        print(f"FAST Application Deployment succeeded with result:\n{json_pp(fast_appsvc_deply_message)}\n")
     else:
         print(f"FAST Application Deployment failed with message: {fast_appsvc_deply_message}")
 
@@ -393,7 +393,7 @@ def fast_appsvc_test():
     # Delete the FAST Application Service and Deployments
     print(f"Deleting FAST Application Service with ID of {fast_appsvc_id}")
     fast_appsvc_deletion_message = delete_fast_appsvc(fast_appsvc_id)
-    print(f"FAST Deployment Deletion Response: {fast_appsvc_deletion_message}\n")
+    print(f"FAST Deployment Deletion Response:\n{json_pp(fast_appsvc_deletion_message)}\n")
 
 def main():
     # Uncomment the as3_test() line to run the AS3 Declaration API test
