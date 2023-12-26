@@ -311,7 +311,8 @@ def patch_fast_appsvc(fast_appsvc_id, declaration):
 DELETE a FAST Application Service Template declaration from the CM API
 '''
 def delete_fast_appsvc(fast_appsvc_id):
-    uri = f"/mgmt/shared/appsvcs/declare/{fast_appsvc_id}"
+    uri =f"/mgmt/shared/fast/appsvcs/{fast_appsvc_id}"
+    # uri = f"/mgmt/shared/appsvcs/declare/{fast_appsvc_id}"
     status_code, r = api_call(endpoint=endpoint, method="delete", uri=uri, access_token="")
 
     return r["message"]
