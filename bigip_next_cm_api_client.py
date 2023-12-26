@@ -52,6 +52,17 @@ Set the allowed HTTP methods
 ALLOWED_METHODS = ["get", "patch", "put", "post", "delete"]
 
 '''
+ANSI Terminal Formatting
+'''
+class color:
+    CYAN = '\033[96m'
+    BLUE = '\033[94m'
+    RED = '\033[91m'
+    BOLD = '\033[1m'
+    UNDERLINE = '\033[4m'
+    END = '\033[0m'
+
+'''
 Prettify JSON output
 '''
 def json_pp(data):
@@ -301,7 +312,7 @@ POST a FAST Application Service Template declaration to the CM API
 def post_fast_appsvc(declaration):
     uri = "/mgmt/shared/fast/appsvcs/"
     status_code, r = api_call(endpoint=endpoint, method="post", uri=uri, access_token="", data=declaration)
-    print(f"post_fast_appsvc:\n{json_pp(r)}\n")
+    print(f"{color.BOLD}{color.CYAN}post_fast_appsvc:{color.END}\n{json_pp(r)}\n")
     
     if status_code == 400:
         return False, r
@@ -326,7 +337,7 @@ def delete_fast_appsvc(fast_appsvc_id):
     uri =f"/mgmt/shared/fast/appsvcs/{fast_appsvc_id}"
     # uri = f"/mgmt/shared/appsvcs/declare/{fast_appsvc_id}"
     status_code, r = api_call(endpoint=endpoint, method="delete", uri=uri, access_token="")
-    print(f"delete_fast_appsvc:\n{json_pp(r)}\n")
+    print(f"{color.BOLD}{color.CYAN}delete_fast_appsvc:{color.END}\n{json_pp(r)}\n")
     return r#["message"]
 
 '''
