@@ -250,21 +250,21 @@ def as3_test():
 
     # Pause the flow to allow validation within CM UI
     # or testing of the deployed declaration
-    input("Press Enter to continue with updating and redeploying the AS3 declaration\n")
+    # input("Press Enter to continue with updating and redeploying the AS3 declaration\n")
 
     # Load v2 of the declaration from a file
-    declaration_v2_filename = "as3_declarations/irule_demo_app001_04_v2.json"
-    print(f"\nReading AS3 declaration from '{declaration_v2_filename}'\n")
-    v2_declaration = read_declaration(declaration_v2_filename)
+    # declaration_v2_filename = "as3_declarations/irule_demo_app001_04_v2.json"
+    # print(f"\nReading AS3 declaration from '{declaration_v2_filename}'\n")
+    # v2_declaration = read_declaration(declaration_v2_filename)
 
     # Update the AS3 declaration to v2 which,
     # adds pool members to the app service
-    print(f"Updating AS3 declaration ID {declaration_id}")
-    declaration_id = put_declaration(declaration_id, v2_declaration)
-    print(f"AS3 Declaration with ID {declaration_id} has been updated\n")
+    # print(f"Updating AS3 declaration ID {declaration_id}")
+    # declaration_id = put_declaration(declaration_id, v2_declaration)
+    # print(f"AS3 Declaration with ID {declaration_id} has been updated\n")
 
     # Execute a brief pause while the declaration is consumed and deployed
-    sleep(2)
+    # sleep(2)
     
     '''
     # Deploy v2 of the AS3 declaration
@@ -412,10 +412,10 @@ def fast_appsvc_test():
 
 def main():
     # Uncomment the as3_test() line to run the AS3 Declaration API test
-    # as3_test()
+    as3_test()
 
     # Uncomment the fast_appsvc_test() line to run the FAST Application Service API test
-    fast_appsvc_test()
+    # fast_appsvc_test()
 
     exit()
 
