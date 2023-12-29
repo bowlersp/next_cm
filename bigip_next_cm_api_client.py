@@ -141,6 +141,7 @@ POST an AS3 declaration to the CM API
 '''
 def post_declaration(declaration):
     uri = "/mgmt/shared/appsvcs/declare"
+    uri = "/mgmt/shared/appsvcs/api/v1/spaces/default/appsvcs/documents"
     status_code, r = api_call(endpoint=endpoint, method="post", uri=uri, access_token="", data=declaration)
     print(f"r ::: {r}")
     
