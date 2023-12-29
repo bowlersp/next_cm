@@ -1,0 +1,47 @@
+{
+  "class": "ADC",
+  "controls": {
+    "class": "Controls",
+    "logLevel": "error"
+  },
+  "id": "http-canonical-cm-example-template",
+  "label": "Central Manager Example Template",
+  "remark": "",
+  "schemaVersion": "3.43.0",
+  "tenantyK5CuWcGQG2yqZ4XJOqL90A": {
+    "class": "Tenant",
+    "test-app": {
+      "class": "Application",
+      "test-pool": {
+        "class": "Pool",
+        "loadBalancingMode": "round-robin",
+        "members": [
+          {
+            "ratio": 10,
+            "servers": [
+              {
+                "address": "10.1.20.100",
+                "name": "node1"
+              }
+            ],
+            "servicePort": 80
+          }
+        ],
+        "monitors": [
+          "http"
+        ]
+      },
+      "test-vs": {
+        "class": "Service_HTTP",
+        "mirroring": "L4",
+        "persistenceMethods": [],
+        "pool": "test-pool",
+        "snat": "auto",
+        "virtualAddresses": [
+          "10.1.10.225"
+        ],
+        "virtualPort": 80
+      }
+    }
+  }
+}
