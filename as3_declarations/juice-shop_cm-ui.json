@@ -8,11 +8,11 @@
   "label": "Central Manager Example Template",
   "remark": "",
   "schemaVersion": "3.43.0",
-  "tenant99JoR1goUSVe91G4eqApftUA": {
+  "JuiceShopTenant": {
     "class": "Tenant",
-    "juice_shop_app": {
+    "juiceshop_app": {
       "class": "Application",
-      "juice_shop_pool": {
+      "juiceshop_pool": {
         "class": "Pool",
         "loadBalancingMode": "round-robin",
         "members": [
@@ -35,14 +35,14 @@
           "http"
         ]
       },
-      "juice_shop_vs": {
+      "juiceshop_vs": {
         "class": "Service_HTTPS",
         "mirroring": "L4",
         "persistenceMethods": [],
         "policyWAF": {
           "bigip": "juice_shop_policy"
         },
-        "pool": "juice_shop_pool",
+        "pool": "juiceshop_pool",
         "serverTLS": "pTLSServer_Local_juice_shop_vs",
         "snat": "auto",
         "virtualAddresses": [
