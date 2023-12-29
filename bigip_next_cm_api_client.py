@@ -186,16 +186,18 @@ def deploy_declaration(declaration_id, instances):
     instance_count = len(instances)
     success_count = 0
     failed_instances = []
+    successful_instances = []
     for instance in instances:
         data = {"target":f"{instance}"}
         status_code, r = api_call(endpoint=endpoint, method="post", uri=uri, access_token="", data=data)
         if status_code == 202:
             success_count += 1
+            successful_instances.append(r)
         else:
             failed_instances.append(instance)
     
     if success_count == instance_count:
-        return True, r
+        return True, successful_instances
     else:
         return False, f"{success_count} of {instance_count} were successful. The following failed: {', '.join(failed_instances)}"
 
@@ -231,7 +233,7 @@ def as3_test():
     print(f"Deploying v1 AS3 declaration ID {declaration_id} to {', '.join(instances)}")
     deploy_success, deploy_message = deploy_declaration(declaration_id, instances)
     if deploy_success:
-        print(f"AS3 Deployment succeeded with result: {deploy_message}\n")
+        print(f"AS3 Deployment succeeded with result:\n{deploy_message}\n")
     else:
         print(f"AS3 Deployment failed with message: {deploy_message}")
 
