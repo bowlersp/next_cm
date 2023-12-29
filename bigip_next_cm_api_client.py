@@ -214,6 +214,7 @@ Run through the following sequence of events:
 def as3_test():
     # Load v1 of the declaration from a file
     declaration_v1_filename = "as3_declarations/irule_demo_app001_04_v1.json"
+    declaration_v1_filename = "juice-shop.json"
     print(f"\nReading AS3 declaration from '{declaration_v1_filename}'\n")
     v1_declaration = read_declaration(declaration_v1_filename)
 
@@ -226,7 +227,7 @@ def as3_test():
         print(f"AS3 Declaration creation failed with message: {declaration_id}")
         return
 
-    instances = ["10.1.1.11", "10.1.1.100"]
+    instances = ["10.1.1.7", "10.1.1.8"]
     print(f"Deploying v1 AS3 declaration ID {declaration_id} to {', '.join(instances)}")
     deploy_success, deploy_message = deploy_declaration(declaration_id, instances)
     if deploy_success:
