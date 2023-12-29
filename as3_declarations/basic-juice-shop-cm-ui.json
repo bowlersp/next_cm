@@ -8,7 +8,7 @@
   "label": "Central Manager Example Template",
   "remark": "",
   "schemaVersion": "3.43.0",
-  "tenantyK5CuWcGQG2yqZ4XJOqL90A": {
+  "JuiceShopTenant": {
     "class": "Tenant",
     "test-app": {
       "class": "Application",
