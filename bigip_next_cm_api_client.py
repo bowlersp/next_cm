@@ -218,6 +218,7 @@ def as3_test():
     # Load v1 of the declaration from a file
     declaration_v1_filename = "as3_declarations/irule_demo_app001_04_v1.json"
     declaration_v1_filename = "as3_declarations/juice-shop_cm-ui.json"
+    declaration_v1_filename = "as3_declarations/juice-shop_cm_api_doc.json"
     print(f"\nReading AS3 declaration from '{declaration_v1_filename}'\n")
     v1_declaration = read_declaration(declaration_v1_filename)
 

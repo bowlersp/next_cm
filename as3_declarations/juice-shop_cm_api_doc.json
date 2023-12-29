@@ -1,0 +1,33 @@
+{
+    "class": "ADC",
+    "schemaVersion": "3.12.0",
+    "DemoTenant": {
+        "class": "Tenant",
+        "TestApp": {
+            "class": "Application",
+            "template": "http",
+            "serviceMain": {
+                "pool": "Pool",
+                "snat": "auto",
+                "virtualPort": 80,
+                "virtualAddresses": [
+                    "10.1.10.225"
+                ],
+                "class": "Service_HTTP"
+            },
+            "Pool": {
+                "members": [
+                    {
+                        "servicePort": 3000,
+                        "serverAddresses": [
+                            "10.1.20.100",
+                            "10.1.20.101"
+                        ]
+                    }
+                ],
+                "loadBalancingMode": "round-robin",
+                "class": "Pool"
+            }
+        }
+    }
+}
