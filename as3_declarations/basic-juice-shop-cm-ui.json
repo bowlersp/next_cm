@@ -24,7 +24,7 @@
                 "name": "node1"
               }
             ],
-            "servicePort": 80
+            "servicePort": 3000
           }
         ],
         "monitors": [
