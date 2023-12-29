@@ -239,7 +239,7 @@ def as3_test():
     sleep(2)
 
     # Attempt retrieving a declaration by tenant name
-    tenant_name = "testTenant001"
+    tenant_name = "JuiceShopTenant"
     print(f"Searching AS3 declarations for tenant named '{tenant_name}'")
     search_success, declaration_id = get_declaration_by_name(tenant_name)
     if search_success:
