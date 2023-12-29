@@ -1,0 +1,76 @@
+{
+  "class": "ADC",
+  "controls": {
+    "class": "Controls",
+    "logLevel": "error"
+  },
+  "id": "http-canonical-cm-example-template",
+  "label": "Central Manager Example Template",
+  "remark": "",
+  "schemaVersion": "3.43.0",
+  "tenant99JoR1goUSVe91G4eqApftUA": {
+    "class": "Tenant",
+    "juice_shop_app": {
+      "class": "Application",
+      "juice_shop_pool": {
+        "class": "Pool",
+        "loadBalancingMode": "round-robin",
+        "members": [
+          {
+            "ratio": 10,
+            "servers": [
+              {
+                "address": "10.1.20.100",
+                "name": "node1"
+              },
+              {
+                "address": "10.1.20.101",
+                "name": "node2"
+              }
+            ],
+            "servicePort": 3000
+          }
+        ],
+        "monitors": [
+          "http"
+        ]
+      },
+      "juice_shop_vs": {
+        "class": "Service_HTTPS",
+        "mirroring": "L4",
+        "persistenceMethods": [],
+        "policyWAF": {
+          "bigip": "juice_shop_policy"
+        },
+        "pool": "juice_shop_pool",
+        "serverTLS": "pTLSServer_Local_juice_shop_vs",
+        "snat": "auto",
+        "virtualAddresses": [
+          "10.1.10.100"
+        ],
+        "virtualPort": 443
+      },
+      "pTLSServer_Local_juice_shop_vs": {
+        "certificates": [
+          {
+            "certificate": "tlsserver_local_cert_juice_shop_vs"
+          }
+        ],
+        "ciphers": "DEFAULT",
+        "class": "TLS_Server",
+        "tls1_1Enabled": false,
+        "tls1_2Enabled": true,
+        "tls1_3Enabled": false
+      },
+      "tlsserver_local_cert_juice_shop_vs": {
+        "certificate": {
+          "bigip": "self_demo.f5.com.crt"
+        },
+        "class": "Certificate",
+        "privateKey": {
+          "bigip": "self_demo.f5.com.pem"
+        }
+      }
+    }
+  }
+}
