@@ -229,7 +229,7 @@ def as3_test():
         print(f"AS3 Declaration creation failed with message: {declaration_id}")
         return
 
-    instances = ["10.1.1.7", "10.1.1.8"]
+    instances = ["10.1.1.7"]
     print(f"Deploying v1 AS3 declaration ID {declaration_id} to {', '.join(instances)}")
     deploy_success, deploy_message = deploy_declaration(declaration_id, instances)
     if deploy_success:
