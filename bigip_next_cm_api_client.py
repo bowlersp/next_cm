@@ -52,6 +52,11 @@ Set the allowed HTTP methods
 ALLOWED_METHODS = ["get", "patch", "put", "post", "delete"]
 
 '''
+Set the allowed Providers
+'''
+ALLOWED_PROVIDERS = ["rseries", "velos", "vsphere"]
+
+'''
 ANSI Terminal Formatting
 '''
 class color:
@@ -133,13 +138,63 @@ def get_f5os_provider_by_name(name):
             if provider["name"] == name:
                 return True, provider["id"]
             
-    return False, f"Unable to find F5OS provider with name {name}"
+    return False, f"Unable to find F5OS provider with name '{name}'"
 
+def post_instance_instatiation(provider, declaration):
+    if provider in ALLOWED_PROVIDERS:
+        uri = f"/api/device/api/v1/spaces/default/instances/instantiation/{provider}"
+        status_code, r = api_call(endpoint=endpoint, method="post", uri=uri, access_token="", data=declaration)
+        print(f"r ::: {r}")
+        
+        if status_code == 400:
+            return False, r
+        else:
+            return True, r["id"]
+        pass
+    else:
+        return False, f"Invalid provider '{provider}'. Must be one of {ALLOWED_PROVIDERS}"
+    
+'''
+GET a BIG-IP Next Instance by Name
+'''
+def get_instance_by_name(name):
+    uri = "/api/v1/spaces/default/instances"
+    status_code, r = api_call(endpoint=endpoint, method="get", uri=uri, access_token="", data="")
+
+    if "_embedded" in r:
+        instances = r["_embedded"]["devices"]
+        for instance in instances:
+            if instance["hostname"] == name:
+                return True, instance["id"]
+            
+    return False, f"Unable to find BIG-IP Next instance with name '{name}'"
+    pass
+
+
+'''
+DELETE a Next Instance
+'''
+def delete_instance(instance_id):
+    uri = f"/api/v1/spaces/default/instances/{instance_id}"
+    status_code, r = api_call(endpoint=endpoint, method="delete", uri=uri, access_token="")
+
+    return r["message"]
 
 def f5os_provider_instance_test():
     provider_name = "r5900"
     provider_found, provider_id = get_f5os_provider_by_name(provider_name)
     print(provider_found, provider_id)
+
+
+    rseries_instance_filename = "f5os_provider/rseries_instance.json"
+    rseries_instance = read_declaration(rseries_instance_filename)
+    rseries_instance_instantiated, rseries_instance_id = post_instance_instatiation("iseries", rseries_instance)
+    print(rseries_instance_instantiated, rseries_instance_id)
+
+    instance_name = "bowler-rseries-next-01-bigip-com"
+    instance_found, instance_id = get_instance_by_name(instance_name)
+    print(instance_found, instance_id)
+
     pass
 
 

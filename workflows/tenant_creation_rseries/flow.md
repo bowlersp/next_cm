@@ -31,7 +31,8 @@ https://{{endpoint}}/api/v1/spaces/default/providers/f5os
 }
 2) send tenant deployment declaration
     https://clouddocs.f5.com/products/big-iq/mgmt-api/v0.0.1/ApiReferences/bigip_public_api_ref/r_openapi-next.html#tag/Instance/operation/RunRseriesInstantiationTask
-    https://{{endpoint}}/api/device/api/v1/spaces/default/instances/instantiation/rseries
+
+    POST https://{{endpoint}}/api/device/api/v1/spaces/default/instances/instantiation/rseries
     {
   "provider_id": "88b58b89-c2c1-44f8-879a-a93bea29fddc",
   "next_instances": [
