@@ -121,11 +121,26 @@ def api_call(endpoint, method, uri, access_token, data=None):
         return 400, f"Invalid method '{method}'"
 
 '''
-Search for an F5 Provider by Name
+Search for an F5OS Provider by Name
 '''
-def get_f5_provider_by_name(name):
-    provider_id = ""
-    return provider_id
+def get_f5os_provider_by_name(name):
+    uri = "/api/v1/spaces/default/providers/f5os"
+    status_code, r = api_call(endpoint=endpoint, method="get", uri=uri, access_token="", data="")
+
+    if "_embedded" in r:
+        providers = r["_embedded"]["providers"]
+        for provider in providers:
+            if provider["name"] == name:
+                return True, provider["id"]
+            
+    return False, f"Unable to find F5OS provider with name {name}"
+
+
+def f5os_provider_instance_test():
+    provider_name = "r5900"
+    provider_found, provider_id = get_f5os_provider_by_name(provider_name)
+    print(provider_found, provider_id)
+    pass
 
 
 '''
@@ -424,8 +439,11 @@ def fast_appsvc_test():
     # print(f"{color.UNDERLINE}FAST Deployment Deletion Response:{color.END}\n{json_pp(fast_appsvc_deletion_message)}\n")
 
 def main():
+    # Uncomment the f5os_provider_instance_test line to run the F5OS Provider tests
+    f5os_provider_instance_test()
+
     # Uncomment the as3_test() line to run the AS3 Declaration API test
-    as3_test()
+    # as3_test()
 
     # Uncomment the fast_appsvc_test() line to run the FAST Application Service API test
     # fast_appsvc_test()
