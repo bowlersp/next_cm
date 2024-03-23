@@ -121,6 +121,14 @@ def api_call(endpoint, method, uri, access_token, data=None):
         return 400, f"Invalid method '{method}'"
 
 '''
+Search for an F5 Provider by Name
+'''
+def get_f5_provider_by_name(name):
+    provider_id = ""
+    return provider_id
+
+
+'''
 Search the application services declarations
 for a specific tenant name and return its ID
 '''

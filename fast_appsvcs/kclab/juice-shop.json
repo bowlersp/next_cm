@@ -1,0 +1,56 @@
+{
+    "name": "juice-shop-app",
+    "template_name": "http",
+    "set_name": "Examples",
+    "parameters": {
+        "pools": [
+            {
+                "servicePort": 3000,
+                "loadBalancingMode": "round-robin",
+                "monitorType": [
+                    "http"
+                ],
+                "poolName": "juice-shop-pool"
+            }
+        ],
+        "virtuals": [
+            {
+                "iRulesEnum": [],
+                "ciphers": "DEFAULT",
+                "enable_Access": false,
+                "tls_c_1_2": true,
+                "tls_c_1_3": false,
+                "enable_TLS_Server": false,
+                "ciphers_server": "DEFAULT",
+                "tls_s_1_2": true,
+                "tls_s_1_3": false,
+                "enable_snat": true,
+                "snat_automap": true,
+                "snat_addresses": [],
+                "enable_FastL4": false,
+                "FastL4_idleTimeout": 600,
+                "FastL4_looseClose": true,
+                "FastL4_looseInitialization": true,
+                "FastL4_resetOnTimeout": true,
+                "FastL4_tcpCloseTimeout": 43200,
+                "FastL4_tcpHandshakeTimeout": 43200,
+                "enable_HTTP2_Profile": false,
+                "enable_UDP_Profile": false,
+                "UDP_idle_timeout": 60,
+                "enable_TCP_Profile": false,
+                "TCP_idle_timeout": 60,
+                "enable_mirroring": true,
+                "enable_TLS_Client": false,
+                "enable_WAF": false,
+                "enable_iRules": false,
+                "virtualPort": 80,
+                "virtualName": "juice-shop-vs",
+                "pool": "juice-shop-pool"
+            }
+        ],
+        "application_description": "",
+        "application_name": "juice-shop-app"
+    },
+    "allowOverwrite": true
+}
+

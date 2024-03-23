@@ -1,0 +1,29 @@
+{
+    "deployments": [
+        {
+            "parameters": {
+                "pools": [
+                    {
+                        "poolName": "juice-shop-pool",
+                        "poolMembers": [
+                            {
+                                "name": "bowler-ubuntu-juice-shop",
+                                "address": "10.11.2.200"
+                            }
+                        ]
+                    }
+                ],
+                "virtuals": [
+                    {
+                        "virtualName": "juice-shop-vs",
+                        "virtualAddress": "10.11.1.200"
+                    }
+                ]
+            },
+            "target": {
+                "address": "192.168.1.170"
+            },
+            "allow_overwrite": true
+        }
+    ]
+}
