@@ -43,6 +43,7 @@ PASSWORD=theworstpassword
 load_dotenv()
 
 endpoint = os.getenv("ENDPOINT")
+f5os_endpoint = os.getenv("F5OS_ENDPOINT")
 username = os.getenv("USERNAME")
 password = os.getenv("PASSWORD")
 
@@ -119,7 +120,10 @@ def api_call(endpoint, method, uri, access_token, data=None):
         elif method == "post":
             response = requests.post(f"https://{endpoint}{uri}", headers=headers, data=json.dumps(data), verify=False)
         elif method == "delete":
-            response = requests.delete(f"https://{endpoint}{uri}", headers=headers, verify=False)
+            if data != None:
+                response = requests.delete(f"https://{endpoint}{uri}", headers=headers, data=json.dumps(data), verify=False)
+            else:
+                response = requests.delete(f"https://{endpoint}{uri}", headers=headers, verify=False)
 
         return response.status_code, response.json()
     else:
@@ -140,16 +144,23 @@ def get_f5os_provider_by_name(name):
             
     return False, f"Unable to find F5OS provider with name '{name}'"
 
+'''
+POST a BIG-IP Next Instance Instantiation Task
+
+Note: Next Instance hostnames must be FQDN format or an
+error will be returned from F5 providers.
+'''
+
 def post_instance_instatiation(provider, declaration):
     if provider in ALLOWED_PROVIDERS:
-        uri = f"/api/device/api/v1/spaces/default/instances/instantiation/{provider}"
+        uri = f"/api/v1/spaces/default/instances/instantiation/{provider}"
         status_code, r = api_call(endpoint=endpoint, method="post", uri=uri, access_token="", data=declaration)
         print(f"r ::: {r}")
         
         if status_code == 400:
             return False, r
         else:
-            return True, r["id"]
+            return True, r["path"]
         pass
     else:
         return False, f"Invalid provider '{provider}'. Must be one of {ALLOWED_PROVIDERS}"
@@ -173,12 +184,29 @@ def get_instance_by_name(name):
 
 '''
 DELETE a Next Instance
-'''
-def delete_instance(instance_id):
-    uri = f"/api/v1/spaces/default/instances/{instance_id}"
-    status_code, r = api_call(endpoint=endpoint, method="delete", uri=uri, access_token="")
 
-    return r["message"]
+Deleting an instance through this method does NOT delete
+the instance from its parent provider.
+
+Also, the rSeries API documentation is.... something to behold.
+
+DELETE https://{{rseries_appliance1_ip}}:8888/restconf/data/f5-tenants:tenants/tenant={{New_Tenant1_Name}}
+
+
+example response
+{'_links': {'self': {'href': '/api/v1/spaces/default/instances/deletion-tasks/4592c271-10f3-4bbe-b9a1-30f5be31543b'}}, 'path': '/api/v1/spaces/default/instances/deletion-tasks/4592c271-10f3-4bbe-b9a1-30f5be31543b'}
+'''
+def delete_instance(instance_id, tenant_name, f5os_endpoint):
+    uri = f"/api/v1/spaces/default/instances/{instance_id}"
+    status_code, r = api_call(endpoint=endpoint, method="delete", uri=uri, access_token="",
+                              data={"save_backup":True})
+    print(status_code, r)
+
+    uri = f"/restconf/data/f5-tenants:tenants/tenant={tenant_name}"
+    delete_tenant = requests.delete(f"{f5os_endpoint}{uri}", auth=("kclab", "F5OSisreallycool1!"), verify=False)
+    print(delete_tenant.status_code)
+
+    return delete_tenant.status_code
 
 def f5os_provider_instance_test():
     provider_name = "r5900"
@@ -188,12 +216,17 @@ def f5os_provider_instance_test():
 
     rseries_instance_filename = "f5os_provider/rseries_instance.json"
     rseries_instance = read_declaration(rseries_instance_filename)
-    rseries_instance_instantiated, rseries_instance_id = post_instance_instatiation("iseries", rseries_instance)
+    rseries_instance_instantiated, rseries_instance_id = post_instance_instatiation("rseries", rseries_instance)
     print(rseries_instance_instantiated, rseries_instance_id)
 
-    instance_name = "bowler-rseries-next-01-bigip-com"
+    instance_name = "bowler-rseries-next-01"
     instance_found, instance_id = get_instance_by_name(instance_name)
     print(instance_found, instance_id)
+
+    input("Press Enter to continue with instance/tenant deletion")
+
+    deletion_status_code = delete_instance(instance_id, instance_name, f"https://{f5os_endpoint}")
+    print(deletion_status_code)
 
     pass
 

@@ -2,7 +2,7 @@
     "provider_id": "88b58b89-c2c1-44f8-879a-a93bea29fddc",
     "next_instances": [
       {
-        "hostname": "bowler-rseries-next-01",
+        "hostname": "bowler-rseries-next-02.bigip.com",
         "tenant_image_name": "BIG-IP-Next-20.1.0-2.279.0+0.0.75",
         "tenant_deployment_file": "BIG-IP-Next-20.1.0-2.279.0+0.0.75.yaml",
         "nodes": [
