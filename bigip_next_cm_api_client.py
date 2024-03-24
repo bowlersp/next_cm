@@ -147,8 +147,6 @@ def get_f5os_provider_by_name(name):
 '''
 POST a BIG-IP Next Instance Instantiation Task
 
-Note: Next Instance hostnames must be FQDN format or an
-error will be returned from F5 providers.
 '''
 
 def post_instance_instatiation(provider, declaration):
