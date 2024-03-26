@@ -217,6 +217,8 @@ def f5os_provider_instance_test():
     rseries_instance_instantiated, rseries_instance_id = post_instance_instatiation("rseries", rseries_instance)
     print(rseries_instance_instantiated, rseries_instance_id)
 
+    input("Press Enter to discover the tenant instance ID.\nYou may need to wait up to 15min.")
+
     instance_name = "bowler-rseries-next-01"
     instance_found, instance_id = get_instance_by_name(instance_name)
     print(instance_found, instance_id)
